@@ -4,7 +4,6 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -49,8 +48,14 @@ app.use(function(req, res) {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log('Environment:', process.env.NODE_ENV || 'development');
-  console.log('API Key configured:', !!process.env.NEWS_API_KEY);
-});
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+// for Vercel
+module.exports = app;
+
+
