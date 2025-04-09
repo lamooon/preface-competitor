@@ -1,4 +1,4 @@
-# preface-competitor
+# Preface-competitor: Postface
 Coding challenge from preface.ai
 
 ## To run manually
